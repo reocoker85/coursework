@@ -5,18 +5,19 @@
 Ключевая задача — разработать отказоустойчивую инфраструктуру для сайта, включающую мониторинг, сбор логов и резервное копирование основных данных. Инфраструктура должна размещаться в [Yandex Cloud](https://cloud.yandex.com/).
 
 ### Сайт
-Cоздаtv ### Instance Group , для которой настройте следующие правила автоматического горизонтального масштабирования: минимальное количество ВМ на зону — 1, максимальный размер группы — 3
+Cоздаем Instance Group с двумя ВМ , для которой настроим следующие правила автоматического горизонтального масштабирования: минимальное количество ВМ на зону — 1, максимальный размер группы — 3.
 
-Создайте [Target Group](https://cloud.yandex.com/docs/application-load-balancer/concepts/target-group), включите в неё две созданных ВМ.
+[2.jpg](./img/2.jpg)
+[3.jpg](./img/3.jpg)
 
-Создайте [Backend Group](https://cloud.yandex.com/docs/application-load-balancer/concepts/backend-group), настройте backends на target group, ранее созданную. Настройте healthcheck на корень (/) и порт 80, протокол HTTP.
+Создаем Target Group, Backend Group, HTTP router, Application load balancer:
 
-Создайте [HTTP router](https://cloud.yandex.com/docs/application-load-balancer/concepts/http-router). Путь укажите — /, backend group — созданную ранее.
+[4.jpg](./img/4.jpg)
 
-Создайте [Application load balancer](https://cloud.yandex.com/en/docs/application-load-balancer/) для распределения трафика на веб-сервера, созданные ранее. Укажите HTTP router, созданный ранее, задайте listener тип auto, порт 80.
+Протестируем сайт`curl -v <публичный IP балансера>:80`: 
+http://158.160.131.212:80
 
-Протестируйте сайт
-`curl -v <публичный IP балансера>:80` 
+[5.jpg](./img/5.jpg)
 
 ### Мониторинг
 Создайте ВМ, разверните на ней Zabbix. На каждую ВМ установите Zabbix Agent, настройте агенты на отправление метрик в Zabbix. 
