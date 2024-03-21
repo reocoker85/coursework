@@ -1,0 +1,10 @@
+#cloud-config
+users:
+  - default
+  - name: user
+    groups: sudo
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCWPQKJ05ckiWybVLc88n+gF9/bTFrE7PTjejvspOAqy4kd2QtsPQ6ZCZnL8qdh5TbDAE2rBGKkn43fWDpr4pRTenzEOF6OkOXQimgZ99deWOsEXnnHcfNUVbUNJqYReIVKjugSgY5oq3oAVuZ41fR2rYeb/JUT1SLJ9v0cTXa/XilbX62WXQy5d1Vf5R9TxN9YlFSVhklKHmICMho7RjPQGJLOGzIwXw19/8QquB98TjObDMwH7V8D1YHhEuv5Pmvm6JGBCdOVpEv4Ua6EuAqhKHKP44dL8HJCukbZtxQ1Li+AXfqp5wRR/mnM85PeC6gNIPad48FXxC2R2iiE0GS47bmJjiVqJoNn61Iju+WX5SE3/SwK2kwX5qbC7wSpzVzg9S6OKEH8vABXvaJ9gjJnmSkDfLxlBvu9ORwOML+s3PHO123qlvmLbnJTA0d7I8RzHa11BZ//hndjsot4AKxfUs9AQHqUS9GNLWPJJBtYYcglpW/qG1B0u31aQH50HFc= vagrant@vm1
+

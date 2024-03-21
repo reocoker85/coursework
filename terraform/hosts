@@ -1,0 +1,33 @@
+
+[web_servers]
+web-1 ansible_host=${web_1_ip}
+web-2 ansible_host=${web_2_ip}
+
+
+[elasticsearch_server]
+elasticsearch ansible_host=${elasticsearch_ip}
+
+[kibana_server]
+kibana ansible_host=${kibana_ip}
+
+[zabbix_frontend]
+zabbix_web ansible_host=${zabbix_frontend_ip}
+
+[zabbix_backend]
+zabbix_server ansible_host=${zabbix_server_ip}
+
+[agents:children]
+web_servers
+elasticsearch_server
+kibana_server
+zabbix_frontend
+zabbix_backend
+
+
+[all:vars]
+elasticsearch_ip=${elasticsearch_ip}
+kibana_ip=${kibana_ip}
+zabbix_web_external=${zabbix_frontend_ip_e}
+kibana_ip_external=${kibana_ip_e}
+db_fqdn=${db_fqdn}
+ansible_ssh_common_args=-J user@${bastion_ip}
