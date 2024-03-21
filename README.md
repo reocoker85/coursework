@@ -13,7 +13,7 @@ Cоздаем Instance Group с двумя ВМ , для которой наст
 Создаем Target Group, Backend Group, HTTP router, Application load balancer:
 
 ![4.jpg](./img/4.jpg)
-
+![6.jpg](./img/6.jpg)
 Протестируем сайт`curl -v <публичный IP балансера>:80`: 
 http://158.160.131.212:80
 
