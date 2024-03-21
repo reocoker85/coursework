@@ -1,0 +1,32 @@
+---
+# tasks file for zabbix_web
+
+
+- name: "Install Zabbix deb package from the internet"
+  ansible.builtin.apt:
+    deb: https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4+ubuntu20.04_all.deb
+    update_cache: yes
+
+- name: "Install zabbix-frontend-php, php7.4-pgsql, zabbix-apache-conf"
+  ansible.builtin.apt:
+    pkg:
+      - zabbix-frontend-php
+      - php7.4-pgsql
+      - zabbix-apache-conf
+    state: latest
+    update_cache: yes
+
+- name: "Copy file with zabbix-web config"
+  ansible.builtin.template:
+    src: ./zabbix/zabbix_web/templates/zabbix.conf.php.j2
+    dest: /etc/zabbix/web/zabbix.conf.php
+    owner: www-data
+    group: www-data
+    mode: '0600'
+  become: true
+
+- name: "Reload service apache2, in all cases"
+  ansible.builtin.service:
+    name: apache2
+    state: reloaded
+

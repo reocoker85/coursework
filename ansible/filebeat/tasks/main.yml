@@ -1,0 +1,35 @@
+---
+# tasks file for filebeat
+
+
+- name: "Install filebeat"
+  ansible.builtin.apt:
+    deb: https://mirror.yandex.ru/mirrors/elastic/7/pool/main/f/filebeat/filebeat-7.17.14-amd64.deb
+    update_cache: yes
+
+- name: "Change config file"
+  ansible.builtin.template:
+    src: templates/filebeat_nginx.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: root
+    group: root
+    mode: 0600
+  notify: "Restart filebeat"
+  when: inventory_hostname == "web-1" or inventory_hostname == "web-2"
+#when: group_names == ["web_servers", "zabbix_agent"] inventory_hostname == "zabbix_server"
+
+- name: "Change config file"
+  ansible.builtin.template:
+    src: templates/filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: root
+    group: root
+    mode: 0600
+  notify: "Restart filebeat"
+  when: inventory_hostname != "web-1" and inventory_hostname != "web-2"
+
+- name: "Make sure a service filebeat is running"
+  ansible.builtin.service:
+    name: filebeat
+    state: started
+    enabled: yes

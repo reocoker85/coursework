@@ -1,0 +1,52 @@
+---
+#  gather_facts: false
+#- name: "Add"
+#  vars:
+#    ansible_network_os: community.zabbix.zabbix
+#    ansible_connection: httpapi
+#    ansible_user: "{{ x_zabbix_username }}"
+#  tasks:
+#  - delegate_to: "{{ x_zabbix_web_ip }}"
+#    block:
+#    - name: "Add/update hosts"
+#      community.zabbix.zabbix_host:
+#        host_name:  web
+#        visible_name: web
+#        host_groups:
+#          - Linux servers
+#        link_templates:
+#          - Template Linux by Zabbix agent
+#        status: enabled
+#        state: present
+#        inventory_mode: disabled
+#        interfaces:
+#        - type: agent
+#          main: 1
+#          useip: 1
+#          ip: 192.168.10.34
+
+- name: "Add/update hosts"
+  vars:
+    ansible_httpapi_port: 80
+    ansible_connection: httpapi
+    ansible_user: "{{ x_zabbix_username }}"
+    ansible_httpapi_pass: "{{ x_zabbix_password }}"
+
+  local_action:
+    module: community.zabbix.zabbix_host
+    server_url: "{{ x_zabbix_web_ip }}"
+    host_name:  web
+    visible_name: web
+    host_groups:
+    - Linux server
+    link_templates:
+    - Template Linux by Zabbix agent
+    status: enabled
+    state: present
+    inventory_mode: disabled
+    interfaces:
+    - type: agent
+      main: 1
+      useip: 1
+      ip: 192.168.10.34
+      port: "10500"

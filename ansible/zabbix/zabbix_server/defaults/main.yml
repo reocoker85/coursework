@@ -1,0 +1,8 @@
+---
+# defaults file for zabbix_server
+
+zabbix_server_dbhost: "{{ db_fqdn }}"
+zabbix_server_dbname: zabbix_db
+zabbix_server_dbuser: reo
+zabbix_server_dbpassword: reocoker
+zabbix_server_dbport: 6432

@@ -1,0 +1,29 @@
+---
+# tasks file for nginx
+
+- name: "Install nginx"
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: "Change conf"
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - src: ./nginx/files/index.html
+      dest: /var/www/html/index.nginx-debian.html
+    - src: ./nginx/files/image.jpg
+      dest: /var/www/html/image.jpg
+  notify: "Restart nginx"
+
+- name: "Make sure a service nginx is running"
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+

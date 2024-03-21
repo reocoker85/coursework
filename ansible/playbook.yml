@@ -1,0 +1,57 @@
+---
+
+- name: "Install nginx"
+  hosts: web_servers
+  become: true
+  roles:
+  - nginx
+  tags:
+  - nginx
+
+- name: "Install elasticsearch"
+  hosts: elasticsearch_server
+  become: true
+  roles:
+  - elasticsearch
+  tags:
+  - elasticsearch
+
+- name: "Install kibana"
+  hosts: kibana_server
+  become: true
+  roles:
+  - kibana
+  tags:
+  - kibana
+
+- name: "Install filebeat"
+  hosts: agents
+  become: true
+  roles:
+  - filebeat
+  tags:
+  - filebeat
+
+- name: "Install zabbix-server"
+  hosts: zabbix_backend
+  become: true
+  roles:
+  - zabbix/zabbix_server
+  tags:
+  - zabbix_server
+
+- name: "Install zabbix-web"
+  hosts: zabbix_frontend
+  become: true
+  roles:
+  - zabbix/zabbix_web
+  tags:
+  - zabbix_web
+
+- name: "Install zabbix-agent"
+  hosts: agents
+  become: true
+  roles:
+  - zabbix/zabbix_agent
+  tags:
+  - zabbix_agent

@@ -1,0 +1,4 @@
+- hosts: zabbix_agent
+  tasks:
+    - debug:
+        var: group_names

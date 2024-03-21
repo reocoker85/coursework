@@ -1,0 +1,22 @@
+---
+# tasks file for elasticsearch
+
+- name: "Install elasticsearch"
+  ansible.builtin.apt:
+    deb: https://mirror.yandex.ru/mirrors/elastic/7/pool/main/e/elasticsearch/elasticsearch-7.17.14-amd64.deb
+    update_cache: yes
+
+- name: "Change config file"
+  ansible.builtin.template:
+    src: templates/elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+    owner: root
+    group: elasticsearch
+    mode: 0660
+  notify: "Restart elasticsearch"
+
+
+- name: "Make sure service elasticsearch is running"
+  ansible.builtin.service:
+    name: elasticsearch
+    state: started

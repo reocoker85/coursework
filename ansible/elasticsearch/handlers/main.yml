@@ -1,0 +1,8 @@
+---
+# handlers file for elasticsearch
+
+
+- name: "Restart elasticsearch"
+  ansible.builtin.service:
+    name: elasticsearch
+    state: restarted

@@ -1,0 +1,22 @@
+---
+# tasks file for kibana
+
+- name: "Install kibana"
+  ansible.builtin.apt:
+    deb: https://mirror.yandex.ru/mirrors/elastic/7/pool/main/k/kibana/kibana-7.17.14-amd64.deb
+    update_cache: yes
+
+- name: "Change config file"
+  ansible.builtin.template:
+    src: templates/kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    owner: root
+    group: kibana
+    mode: 0660
+  notify: "Restart kibana"
+
+- name: "Make sure service kibana is running"
+  ansible.builtin.service:
+    name: kibana
+    state: started
+    enabled: yes

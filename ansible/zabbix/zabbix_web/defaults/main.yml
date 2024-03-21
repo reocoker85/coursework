@@ -1,0 +1,15 @@
+---
+# defaults file for zabbix_web
+
+zabbix_server_dbhost: "{{ db_fqdn }}"
+zabbix_server_dbtype: POSTGRESQL
+zabbix_server_dbport: 6432
+zabbix_server_dbname: zabbix_db
+zabbix_server_dbuser: reo
+zabbix_server_dbpassword: reocoker
+zabbix_server_name: "{{ groups['zabbix_backend'] | join('')}}"
+zabbix_server_hostname: "{{ hostvars['zabbix_server'].ansible_host | join('') }}"
+zabbix_server_listenport: 10051
+
+
+
