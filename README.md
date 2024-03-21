@@ -29,6 +29,7 @@ Cоздаем ВМ c Elasticsearch и с Kibana ( доступ по ссылке
 
 ![8.jpg](./img/8.jpg)
 ![9.jpg](./img/9.jpg)
+![13.jpg](./img/13.jpg)
 ### Сеть
 Реализуем концепцию bastion host используя NAT instance:
 ![1.jpg](./img/1.jpg)
@@ -36,7 +37,8 @@ Cоздаем ВМ c Elasticsearch и с Kibana ( доступ по ссылке
 ![11.jpg](./img/11.jpg)
 
 ### Резервное копирование
-Создайте snapshot дисков всех ВМ. Ограничьте время жизни snaphot в неделю. Сами snaphot настройте на ежедневное копирование.
+![12.jpg](./img/12.jpg)
+
 
 
 
