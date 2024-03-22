@@ -10,6 +10,7 @@ data "yandex_compute_image" "nat_instance_image" {
 
 resource "yandex_compute_instance" "vm-1" {
   name        = "bastion"
+  hostname    = "bastion"
   platform_id = "standard-v3"
   zone        = "ru-central1-d"
 
